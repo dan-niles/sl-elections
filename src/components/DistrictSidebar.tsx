@@ -80,10 +80,10 @@ const DistrictSidebar = (props: {
 													props.setSelectedDistrict(district);
 													props.setSelectedDivision(division.name);
 												}}
-												className={`block rounded px-5 p-2 text-sm font-medium text-black dark:text-white hover:dark:text-black hover:bg-slate-50 cursor-pointer ${
+												className={`block rounded px-5 p-2 text-sm font-medium hover:dark:text-black hover:bg-slate-50 cursor-pointer ${
 													props.selectedDivision === division.name
 														? "bg-slate-100 text-black dark:text-black"
-														: ""
+														: "text-black dark:text-white"
 												}`}
 											>
 												{division.name}{" "}

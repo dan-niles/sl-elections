@@ -81,16 +81,22 @@ export function DataTable<TData, TValue>({
 									key={row.id}
 									data-state={row.getIsSelected() && "selected"}
 									className={classNames({
-										"bg-red-100": row.getValue("party") === "NPP",
-										"bg-green-100": row.getValue("party") === "SJB",
-										"bg-orange-50": row.getValue("party") === "IND16",
-										"bg-white": !AVAILABLE_PARTIES.includes(
+										"bg-red-100 dark:bg-red-950":
+											row.getValue("party") === "NPP",
+										"bg-green-100 dark:bg-green-950":
+											row.getValue("party") === "SJB",
+										"bg-orange-50 dark:bg-yellow-950":
+											row.getValue("party") === "IND16",
+										"bg-white dark:bg-black": !AVAILABLE_PARTIES.includes(
 											row.getValue("party")
 										),
 									})}
 								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>
+										<TableCell
+											key={cell.id}
+											className="text-black dark:text-white"
+										>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()

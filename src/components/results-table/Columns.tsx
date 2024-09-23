@@ -49,7 +49,7 @@ export const columns: ColumnDef<Result>[] = [
 							href={wiki}
 							target="_blank"
 							rel="noreferrer"
-							className="text-black underline hover:text-slate-600"
+							className="text-black dark:text-white underline hover:text-slate-600 hover:dark:text-slate-200"
 						>
 							{candidate as string}
 						</a>

@@ -16,3 +16,22 @@
 body {
 	margin: 0;
 }
+
+@layer base {
+	:root {
+		--radius: 0.5rem;
+	}
+}
+
+*,
+::before,
+::after,
+.border-input {
+	border-color: #d4d4d4;
+}
+
+html.dark *,
+::before,
+::after {
+	border-color: #262626;
+}

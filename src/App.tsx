@@ -34,7 +34,7 @@ export function App() {
 	}, [selectedDistrict, selectedDivision]);
 
 	return (
-		<div>
+		<div className="dark:bg-black dark:text-white">
 			<Header />
 			<main className="min-h-[calc(100vh_-_theme(spacing.16))] flex flex-row align-top gap-4 bg-muted/40 p-4 md:gap-8 md:p-5">
 				<DistrictSidebar
@@ -44,7 +44,7 @@ export function App() {
 					setSelectedDivision={setSelectedDivision}
 				/>
 				<div className="flex-1">
-					<h1 className="text-xl font-semibold text-slate-900 mb-4">
+					<h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
 						{selectedDistrict && selectedDivision
 							? `${selectedDistrict} - ${selectedDivision} Results`
 							: "All Island Results"}

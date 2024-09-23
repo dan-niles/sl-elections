@@ -50,7 +50,7 @@ const DistrictSidebar = (props: {
 		<aside className="w-64 overflow-auto">
 			<Accordion type="single" className="w-full" collapsible>
 				<Button
-					className="w-full mb-2 hover:bg-slate-50 border-slate-300"
+					className="w-full mb-2 hover:bg-slate-100 hover:dark:text-black bg-white text-black border"
 					variant="outline"
 					onClick={() => {
 						props.setSelectedDistrict(null);
@@ -59,12 +59,14 @@ const DistrictSidebar = (props: {
 				>
 					<span className="text-sm font-medium">All Island Results</span>
 				</Button>
-				<div className="border border-slate-200 rounded">
+				<div className="border rounded">
 					{Object.entries(districts).map(([district, divisions]) => (
 						<AccordionItem value={district} key={district}>
 							<AccordionTrigger
 								className={`${
-									props.selectedDistrict === district ? "bg-slate-100" : ""
+									props.selectedDistrict === district
+										? "bg-slate-100 dark:text-black"
+										: ""
 								} px-4 rounded`}
 							>
 								{district}
@@ -78,9 +80,9 @@ const DistrictSidebar = (props: {
 													props.setSelectedDistrict(district);
 													props.setSelectedDivision(division.name);
 												}}
-												className={`block rounded px-5 p-2 text-sm font-medium text-slate-900 hover:bg-slate-50 cursor-pointer ${
+												className={`block rounded px-5 p-2 text-sm font-medium text-black dark:text-white hover:dark:text-black hover:bg-slate-50 cursor-pointer ${
 													props.selectedDivision === division.name
-														? "bg-slate-100"
+														? "bg-slate-100 dark:text-black"
 														: ""
 												}`}
 											>

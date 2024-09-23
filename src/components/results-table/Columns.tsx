@@ -2,6 +2,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "../ui/button";
 
+import { CANDIDATES } from "../../data/candidates";
+
 export type Result = {
 	rank: number;
 	party: string;
@@ -29,6 +31,11 @@ export const columns: ColumnDef<Result>[] = [
 				? row.getValue("party")
 				: "UNKNOWN";
 			const candidate = cell.getValue();
+			const candidateData = CANDIDATES.find(
+				(c) => c.party == row.getValue("party")
+			);
+			const wiki = candidateData?.wiki;
+
 			return (
 				<div className="flex flex-row gap-3 align-middle items-center">
 					<img
@@ -37,7 +44,18 @@ export const columns: ColumnDef<Result>[] = [
 						width="35"
 						height="35"
 					/>
-					<p>{candidate as string}</p>
+					{wiki ? (
+						<a
+							href={wiki}
+							target="_blank"
+							rel="noreferrer"
+							className="text-black underline hover:text-slate-600"
+						>
+							{candidate as string}
+						</a>
+					) : (
+						<p>{candidate as string}</p>
+					)}
 				</div>
 			);
 		},

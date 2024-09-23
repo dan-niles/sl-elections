@@ -32,7 +32,18 @@ const DistrictSidebar = (props: {
 			.get(
 				"https://raw.githubusercontent.com/dan-niles/sl-election-scraper/refs/heads/main/data/districts.json"
 			)
-			.then((res) => setDistricts(res.data));
+			.then((res) => {
+				const sortedDistricts: DistrictResults = {};
+				Object.keys(res.data)
+					.sort()
+					.forEach((district) => {
+						sortedDistricts[district] = res.data[district].sort(
+							(a: DivisionResult, b: DivisionResult) =>
+								a.name.localeCompare(b.name)
+						);
+					});
+				setDistricts(sortedDistricts);
+			});
 	}, []);
 
 	return (

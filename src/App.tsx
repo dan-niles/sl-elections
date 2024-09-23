@@ -44,13 +44,15 @@ export function App() {
 					setSelectedDivision={setSelectedDivision}
 				/>
 				<div className="flex-1">
-					<h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
-						{selectedDistrict && selectedDivision
-							? `${selectedDistrict} - ${selectedDivision} Results`
-							: "All Island Results"}
-					</h1>
 					{isLoading && <p>Loading...</p>}
-					{!isLoading && <DataTable columns={columns} data={results} />}
+					{!isLoading && (
+						<DataTable
+							columns={columns}
+							data={results}
+							selectedDistrict={selectedDistrict}
+							selectedDivision={selectedDivision}
+						/>
+					)}
 				</div>
 			</main>
 		</div>

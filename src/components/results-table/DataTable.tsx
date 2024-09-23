@@ -9,6 +9,8 @@ import {
 	useReactTable,
 	getPaginationRowModel,
 	getSortedRowModel,
+	ColumnFiltersState,
+	getFilteredRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -23,21 +25,29 @@ import {
 import { AVAILABLE_PARTIES } from "./Columns";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
+	selectedDivision: string | null;
+	selectedDistrict: string | null;
 }
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
+	selectedDivision,
+	selectedDistrict,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [pagination, setPagination] = React.useState({
 		pageIndex: 0, //initial page index
 		pageSize: 25, //default page size
 	});
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+		[]
+	);
 	const table = useReactTable({
 		data,
 		columns,
@@ -46,14 +56,34 @@ export function DataTable<TData, TValue>({
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
 		onPaginationChange: setPagination,
+		onColumnFiltersChange: setColumnFilters,
+		getFilteredRowModel: getFilteredRowModel(),
 		state: {
 			sorting,
 			pagination,
+			columnFilters,
 		},
 	});
 
 	return (
 		<div>
+			<div className="flex justify-between align-middle py-2">
+				<h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+					{selectedDistrict && selectedDivision
+						? `${selectedDistrict} - ${selectedDivision} Results`
+						: "All Island Results"}
+				</h1>
+				<Input
+					placeholder="Search candidate..."
+					value={
+						(table.getColumn("candidate")?.getFilterValue() as string) ?? ""
+					}
+					onChange={(event) =>
+						table.getColumn("candidate")?.setFilterValue(event.target.value)
+					}
+					className="w-64"
+				/>
+			</div>
 			<div className="rounded-md border w-full">
 				<Table>
 					<TableHeader>

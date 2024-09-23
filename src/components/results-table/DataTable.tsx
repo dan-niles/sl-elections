@@ -34,6 +34,10 @@ export function DataTable<TData, TValue>({
 	data,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
+	const [pagination, setPagination] = React.useState({
+		pageIndex: 0, //initial page index
+		pageSize: 25, //default page size
+	});
 	const table = useReactTable({
 		data,
 		columns,
@@ -41,8 +45,10 @@ export function DataTable<TData, TValue>({
 		getPaginationRowModel: getPaginationRowModel(),
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
+		onPaginationChange: setPagination,
 		state: {
 			sorting,
+			pagination,
 		},
 	});
 

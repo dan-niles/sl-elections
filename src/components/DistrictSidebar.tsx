@@ -7,7 +7,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "./ui/button";
 
 type DivisionResult = {
@@ -35,25 +34,27 @@ const DistrictSidebar = (props: {
 			)
 			.then((res) => setDistricts(res.data));
 	}, []);
+
 	return (
-		<aside className={"w-64 overflow-auto"}>
-			<ScrollArea className="h-[calc(100vh-8rem)] border p-4 relative">
-				<Accordion type="single" className="w-full" collapsible>
-					<Button
-						className="w-full py-2 mb-2"
-						onClick={() => {
-							props.setSelectedDistrict(null);
-							props.setSelectedDivision(null);
-						}}
-					>
-						<span className="text-sm font-medium">All Island Results</span>
-					</Button>
+		<aside className="w-64 overflow-auto">
+			<Accordion type="single" className="w-full" collapsible>
+				<Button
+					className="w-full mb-2 hover:bg-slate-50 border-slate-300"
+					variant="outline"
+					onClick={() => {
+						props.setSelectedDistrict(null);
+						props.setSelectedDivision(null);
+					}}
+				>
+					<span className="text-sm font-medium">All Island Results</span>
+				</Button>
+				<div className="border border-slate-200 rounded">
 					{Object.entries(districts).map(([district, divisions]) => (
 						<AccordionItem value={district} key={district}>
 							<AccordionTrigger
 								className={`${
 									props.selectedDistrict === district ? "bg-slate-100" : ""
-								} px-2 rounded`}
+								} px-4 rounded`}
 							>
 								{district}
 							</AccordionTrigger>
@@ -66,7 +67,7 @@ const DistrictSidebar = (props: {
 													props.setSelectedDistrict(district);
 													props.setSelectedDivision(division.name);
 												}}
-												className={`block rounded p-2 text-sm font-medium text-slate-900 hover:bg-slate-50 cursor-pointer ${
+												className={`block rounded px-5 p-2 text-sm font-medium text-slate-900 hover:bg-slate-50 cursor-pointer ${
 													props.selectedDivision === division.name
 														? "bg-slate-100"
 														: ""
@@ -85,8 +86,8 @@ const DistrictSidebar = (props: {
 							</AccordionContent>
 						</AccordionItem>
 					))}
-				</Accordion>
-			</ScrollArea>
+				</div>
+			</Accordion>
 		</aside>
 	);
 };

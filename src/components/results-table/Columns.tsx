@@ -55,6 +55,9 @@ export const columns: ColumnDef<Result>[] = [
 				</Button>
 			);
 		},
+		cell: ({ cell }) => {
+			return new Intl.NumberFormat().format(Number(cell.getValue()));
+		},
 	},
 	{
 		accessorKey: "percentage",

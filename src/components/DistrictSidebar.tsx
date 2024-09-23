@@ -50,7 +50,11 @@ const DistrictSidebar = (props: {
 		<aside className="w-64 overflow-auto">
 			<Accordion type="single" className="w-full" collapsible>
 				<Button
-					className="w-full mb-2 hover:bg-slate-200 hover:dark:text-black bg-white text-black border"
+					className={`w-full mb-2 border ${
+						!props.selectedDistrict && !props.selectedDivision
+							? "bg-black dark:bg-white text-white dark:text-black hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black"
+							: "bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black"
+					}`}
 					variant="outline"
 					onClick={() => {
 						props.setSelectedDistrict(null);

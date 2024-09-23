@@ -8,6 +8,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "./ui/button";
+import { Mail } from "lucide-react";
 
 type DivisionResult = {
 	name: string;
@@ -69,7 +70,7 @@ const DistrictSidebar = (props: {
 							<AccordionTrigger
 								className={`${
 									props.selectedDistrict === district
-										? "bg-slate-100 dark:text-black"
+										? "bg-black text-white dark:bg-white dark:text-black"
 										: ""
 								} px-4 rounded`}
 							>
@@ -79,24 +80,25 @@ const DistrictSidebar = (props: {
 								<ul>
 									{divisions.map((division, i) => (
 										<li key={i}>
-											<span
+											<p
 												onClick={() => {
 													props.setSelectedDistrict(district);
 													props.setSelectedDivision(division.name);
 												}}
-												className={`block rounded px-5 p-2 text-sm font-medium hover:dark:text-black hover:bg-slate-50 cursor-pointer ${
-													props.selectedDivision === division.name
-														? "bg-slate-100 text-black dark:text-black"
-														: "text-black dark:text-white"
+												className={`flex align-middle items-center rounded px-5 p-2 text-sm font-medium cursor-pointer ${
+													props.selectedDivision === division.name &&
+													props.selectedDistrict === district
+														? "bg-black text-white dark:bg-white dark:text-black hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black"
+														: "text-black dark:text-white hover:dark:text-black hover:bg-white"
 												}`}
 											>
-												{division.name}{" "}
-												{division.status === "PENDING" && (
-													<span className="text-xs text-yellow-500">
-														(Pending)
+												<span className="">{division.name}</span>{" "}
+												{division.name === "Postal Votes" && (
+													<span className="ms-2 flex">
+														<Mail size={16} className="inline" />
 													</span>
 												)}
-											</span>
+											</p>
 										</li>
 									))}
 								</ul>

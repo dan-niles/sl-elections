@@ -26,6 +26,7 @@ import { AVAILABLE_PARTIES } from "./Columns";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -73,16 +74,19 @@ export function DataTable<TData, TValue>({
 						? `${selectedDistrict} - ${selectedDivision} Results`
 						: "All Island Results"}
 				</h1>
-				<Input
-					placeholder="Search candidate..."
-					value={
-						(table.getColumn("candidate")?.getFilterValue() as string) ?? ""
-					}
-					onChange={(event) =>
-						table.getColumn("candidate")?.setFilterValue(event.target.value)
-					}
-					className="w-64"
-				/>
+				<div className="flex flex-row items-center">
+					<Search className="w-4 h-4 text-black dark:text-white block me-2" />
+					<Input
+						placeholder="Search candidate..."
+						value={
+							(table.getColumn("candidate")?.getFilterValue() as string) ?? ""
+						}
+						onChange={(event) =>
+							table.getColumn("candidate")?.setFilterValue(event.target.value)
+						}
+						className="w-64"
+					/>
+				</div>
 			</div>
 			<div className="rounded-md border w-full">
 				<Table>
